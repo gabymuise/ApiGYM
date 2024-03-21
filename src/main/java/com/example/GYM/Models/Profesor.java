@@ -1,9 +1,11 @@
 package com.example.GYM.Models;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import javax.persistence.*;
+
 import java.util.List;
+
 
 @Entity
 @Table(name = "profesor")
@@ -19,5 +21,6 @@ public class Profesor {
     private Persona persona;
 
     @OneToMany
-    private List<Materia> materias;
+    private List<Clase> clases;
+
 }

@@ -25,7 +25,7 @@ public class ProfesorService {
     public ResponseEntity setProfesor(ProfesorRequest profesorRequest) throws SQLException {
         Profesor profesor = new Profesor();
         setPersonaNuevaOExistente(profesorRequest, profesor);
-        profesor = profesorMapper.profesorRequestToProfesor(profesorRequest, profesor);
+        //profesor = profesorMapper.profesorRequestToProfesor(profesorRequest, profesor);
 
         try {
             profesorRepository.save(profesor);

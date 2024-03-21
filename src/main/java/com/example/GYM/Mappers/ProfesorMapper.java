@@ -1,12 +1,13 @@
 package com.example.GYM.Mappers;
 
-import com.example.GYM.DTOS.Requests.MateriaRequest;
+import com.example.GYM.DTOS.Requests.ClaseRequest;
 import com.example.GYM.DTOS.Requests.ProfesorRequest;
-import com.example.GYM.Models.Materia;
+import com.example.GYM.Models.Clase;
 import com.example.GYM.Models.Persona;
 import com.example.GYM.Models.Profesor;
-import com.example.GYM.Services.MateriaService;
+import com.example.GYM.Services.ClaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,20 +16,9 @@ import java.util.List;
 public class ProfesorMapper {
 
     @Autowired
-    private MateriaService materiaService;
+    private ClaseService claseService;
 
-    public Profesor profesorRequestToProfesor(ProfesorRequest profesorRequest, Profesor profesor){
-        List<Materia> materiaList = new ArrayList<>();
-        for (MateriaRequest materiaRequest : profesorRequest.getMaterias()) {
-            Materia materia = new Materia();
-            materia.setNombre(materiaRequest.getNombre());
-            materia.setAnio(materiaRequest.getAnio());
-            materia = materiaService.setMateriaNuevaOExistente(materiaRequest, materia);
-            materiaList.add(materia);
-        }
-        profesor.setMaterias(materiaList);
-        return profesor;
-    }
+    //public Profesor profesorRequestToProfesor(ProfesorRequest profesorRequest, Profesor profesor)
 
     public Persona profesorRequestToPersona(ProfesorRequest profesorRequest) {
         Persona persona = new Persona();
