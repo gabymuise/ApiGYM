@@ -1,9 +1,9 @@
 package com.example.GYM.Services;
 
 import com.example.GYM.DTOS.Requests.ClaseRequest;
-import com.example.GYM.Mappers.ClaseMapper;
 import com.example.GYM.Models.Clase;
 import com.example.GYM.Repositories.ClaseRepository;
+import com.example.GYM.Mappers.ClaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class ClaseService {
     @Autowired
     private ClaseMapper claseMapper;
 
-    private ResponseEntity crearNuevaClase(ClaseRequest claseRequest) {
+    public ResponseEntity<?> crearNuevaClase(ClaseRequest claseRequest) {
         Boolean existeClase = !findByNombre(claseRequest.getNombre()).isEmpty();
         if (!existeClase) {
             Clase clase = claseMapper.claseRequestToClase(claseRequest);
@@ -30,11 +30,12 @@ public class ClaseService {
         }
     }
 
-    private ResponseEntity actualizarClaseExistente(ClaseRequest claseRequest, Clase claseExistente) {
-        Clase claseActualizada = claseMapper.actualizarClaseDesdeRequest(claseRequest, claseExistente);
-        claseRepository.save(claseActualizada);
-        return ResponseEntity.ok("Clase actualizada: " + claseActualizada.getNombre());
+    public ResponseEntity<?> actualizarClaseExistente(ClaseRequest claseRequest, Clase claseExistente) {
+        claseMapper.actualizarClaseDesdeRequest(claseRequest, claseExistente);
+        claseRepository.save(claseExistente);
+        return ResponseEntity.ok("Clase actualizada: " + claseExistente.getNombre());
     }
+
     public List<Clase> findByNombre(String nombre) {
         return claseRepository.findByNombre(nombre);
     }
@@ -46,5 +47,4 @@ public class ClaseService {
     public void deleteClase(Long id) {
         claseRepository.deleteById(id);
     }
-
 }

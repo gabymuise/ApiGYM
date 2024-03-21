@@ -14,37 +14,28 @@ public class ClaseMapper {
         }
 
         Clase clase = new Clase();
-
-        // Aquí debes asignar los valores de los campos de claseRequest a los de clase.
-        // Ejemplo:
-        // clase.setNombre(claseRequest.getNombre());
-        // Más asignaciones aquí...
-
-        return clase;
-    }
-    public static Clase toEntity(ClaseRequest claseRequest) {
-        Clase clase = new Clase();
         clase.setNombre(claseRequest.getNombre());
         clase.setDescripcion(claseRequest.getDescripcion());
         clase.setTipo(claseRequest.getTipo());
         clase.setDuracion(claseRequest.getDuracion());
         clase.setPrecio(claseRequest.getPrecio());
-        // Aquí puedes añadir más campos si tu entidad Clase los tiene.
+        // Aquí puedes añadir más asignaciones si tu entidad Clase los tiene.
         return clase;
     }
 
     // Actualiza un objeto Clase existente con los valores de ClaseRequest
     // Este método asume que quieres actualizar una entidad Clase existente con nuevos valores de un ClaseRequest
-    public Clase actualizarClaseDesdeRequest(ClaseRequest claseRequest, Clase claseExistente) {
+    public void actualizarClaseDesdeRequest(ClaseRequest claseRequest, Clase claseExistente) {
         if (claseRequest == null || claseExistente == null) {
-            return null;
+            return;
         }
 
-        // Aquí debes actualizar los campos de claseExistente con los valores de claseRequest.
-        // Ejemplo:
-        // claseExistente.setNombre(claseRequest.getNombre());
-        // Más actualizaciones aquí...
-
-        return claseExistente;
+        claseExistente.setNombre(claseRequest.getNombre());
+        claseExistente.setDescripcion(claseRequest.getDescripcion());
+        claseExistente.setTipo(claseRequest.getTipo());
+        claseExistente.setDuracion(claseRequest.getDuracion());
+        claseExistente.setPrecio(claseRequest.getPrecio());
+        // Aquí puedes añadir más actualizaciones si tu entidad Clase los tiene.
     }
 }
+
