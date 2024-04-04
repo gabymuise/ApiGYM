@@ -6,8 +6,9 @@ import com.example.GYM.Mappers.PersonaMapper;
 import com.example.GYM.Models.Persona;
 import com.example.GYM.Repositories.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -19,31 +20,26 @@ public class PersonaService {
     @Autowired
     private PersonaMapper personaMapper;
 
-    public ResponseEntity setPersona(PersonaRequest personaRequest) {
-        Boolean existePersona = !findByDni(personaRequest.getDni()).isEmpty();
-        if(!existePersona){
-            Persona persona = personaMapper.personaRequestToPersona(personaRequest);
-            personaRepository.save(persona);
-            return ResponseEntity.ok("Persona guardada: " + persona.getNombre() + " " + persona.getApellido());
-        } else {
-            return ResponseEntity.badRequest().body("La persona con el DNI especificado ya existe.");
+    @Transactional
+    public String registrarPersona(PersonaRequest personaRequest) {
+        if (personaRepository.findByDni(personaRequest.getDni()).isEmpty()){
+            throw new IllegalArgumentException("La persona con el DNI especificado ya existe.");
         }
+        Persona persona = personaMapper.toPersona(personaRequest);
+        personaRepository.save(persona);
+        return "Persona guardada: " + persona.getNombre() + " " + persona.getApellido();
     }
 
     public PersonasResponse listarPersonas() {
-        List<Persona> listaPersonas = personaRepository.findAll();
-        return personaMapper.personaListToResponse(listaPersonas);
+        List<Persona> personas = personaRepository.findAll();
+        return personaMapper.toPersonasResponse(personas);
     }
 
-    public List<Persona> findByDni(String dni) {
-        return personaRepository.findByDni(dni);
-    }
-
-    public Persona save(Persona persona) {
-        return personaRepository.save(persona);
-    }
-
-    public void deletePersona(Long id) {
+    @Transactional
+    public void eliminarPersona(Long id) {
+        if (!personaRepository.existsById(id)) {
+            throw new IllegalArgumentException("No se pudo encontrar la persona con el ID especificado.");
+        }
         personaRepository.deleteById(id);
     }
 }

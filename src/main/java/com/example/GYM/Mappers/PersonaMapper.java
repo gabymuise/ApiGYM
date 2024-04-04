@@ -4,38 +4,39 @@ import com.example.GYM.DTOS.Requests.PersonaRequest;
 import com.example.GYM.DTOS.Response.PersonaResponse;
 import com.example.GYM.DTOS.Response.PersonasResponse;
 import com.example.GYM.Models.Persona;
-import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.stereotype.Component;
 
-@Service
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Component
 public class PersonaMapper {
 
-    public Persona personaRequestToPersona(PersonaRequest personaRequest){
-        Persona persona = new Persona();
-        persona.setNombre(personaRequest.getNombre());
-        persona.setApellido(personaRequest.getApellido());
-        persona.setDni(personaRequest.getDni());
-        persona.setDireccion(personaRequest.getDireccion());
-        persona.setMail(personaRequest.getMail());
-        persona.setTelefono(personaRequest.getTelefono());
-        return persona;
+    public PersonaResponse toPersonaResponse(Persona persona) {
+        PersonaResponse response = new PersonaResponse();
+        response.setNombre(persona.getNombre());
+        response.setApellido(persona.getApellido());
+        response.setDni(persona.getDni());
+        response.setTelefono(persona.getTelefono());
+        response.setMail(persona.getMail());
+        response.setDireccion(persona.getDireccion());
+        return response;
     }
 
-    public PersonasResponse personaListToResponse(List<Persona> personas) {
-        List<PersonaResponse> personaResponseList = new ArrayList<>();
-        for (Persona persona : personas) {
-            PersonaResponse personaResponse = new PersonaResponse();
-            personaResponse.setApellido(persona.getApellido());
-            personaResponse.setNombre(persona.getNombre());
-            personaResponse.setDireccion(persona.getDireccion());
-            personaResponse.setTelefono(persona.getTelefono());
-            personaResponse.setMail(persona.getMail());
-            personaResponse.setDni(persona.getDni());
-            personaResponseList.add(personaResponse);
-        }
-        PersonasResponse personasResponse = new PersonasResponse();
-        personasResponse.setPersonas(personaResponseList);
-        return personasResponse;
+    public PersonasResponse toPersonasResponse(List<Persona> personas) {
+        PersonasResponse response = new PersonasResponse();
+        response.setPersonas(personas.stream().map(this::toPersonaResponse).collect(Collectors.toList()));
+        return response;
+    }
+
+    public Persona toPersona(PersonaRequest request) {
+        Persona persona = new Persona();
+        persona.setNombre(request.getNombre());
+        persona.setApellido(request.getApellido());
+        persona.setDni(request.getDni());
+        persona.setTelefono(request.getTelefono());
+        persona.setMail(request.getMail());
+        persona.setDireccion(request.getDireccion());
+        return persona;
     }
 }

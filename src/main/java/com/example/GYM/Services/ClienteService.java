@@ -1,14 +1,10 @@
 package com.example.GYM.Services;
 
 import com.example.GYM.DTOS.Requests.ClienteRequest;
-import com.example.GYM.DTOS.Requests.ProfesorRequest;
 import com.example.GYM.Mappers.ClienteMapper;
-import com.example.GYM.Mappers.ProfesorMapper;
 import com.example.GYM.Models.Cliente;
 import com.example.GYM.Models.Persona;
-import com.example.GYM.Models.Profesor;
 import com.example.GYM.Repositories.ClienteRepository;
-import com.example.GYM.Repositories.ProfesorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
