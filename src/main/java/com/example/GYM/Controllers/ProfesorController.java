@@ -3,33 +3,33 @@ package com.example.GYM.Controllers;
 import com.example.GYM.DTOS.Requests.ProfesorRequest;
 import com.example.GYM.Services.ProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
-
+@RestController
 @RequestMapping("/profesores")
-@Controller
 public class ProfesorController {
 
     @Autowired
     private ProfesorService profesorService;
 
-    @PostMapping("/nuevoProfesor")
-    @ResponseBody
-    public ResponseEntity nuevoProfesor(@RequestBody ProfesorRequest profesorRequest) throws SQLException {
-        return profesorService.setProfesor(profesorRequest);
+    @PostMapping("/nuevo")
+    public ResponseEntity<String> nuevoProfesor(@RequestBody ProfesorRequest profesorRequest) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(profesorService.registrarProfesor(profesorRequest));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
-    @DeleteMapping("/borrarProfesor/{id}")
-    @ResponseBody
-    public ResponseEntity borrarProfesor(@PathVariable("id") Long id) throws SQLException {
+    @DeleteMapping("/borrar/{id}")
+    public ResponseEntity<String> borrarProfesor(@PathVariable("id") Long id) {
         try {
-            profesorService.deleteProfesor(id);
+            profesorService.eliminarProfesor(id);
             return ResponseEntity.ok("Registro eliminado");
-        } catch (Exception ex) {
-            return ResponseEntity.badRequest().body("No se pudo eliminar el registro. El error es: " + ex.getMessage());
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

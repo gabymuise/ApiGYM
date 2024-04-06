@@ -35,9 +35,6 @@ public class ClienteService {
         return ResponseEntity.ok("Profesor guardado: " + cliente.getPersona().getNombre() + " "
                 + cliente.getPersona().getApellido());
     }
-
-    // Toma los datos de la persona de ProfesorRequest, verifica si existe la persona. Si no es así la crea
-    // y si existe, toma esos datos y los asigna a profesor.
     public void setPersonaNuevaOExistente(ClienteRequest clienteRequest, Cliente cliente) {
         if (personaService.findByDni(clienteRequest.getPersona().getDni()).isEmpty()) {
             Persona persona = clienteMapper.clienteRequestToPersona(clienteRequest);
