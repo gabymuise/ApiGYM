@@ -1,19 +1,11 @@
 package com.example.GYM.Mappers;
 
-
 import com.example.GYM.DTOS.Requests.ClienteRequest;
 import com.example.GYM.Models.Persona;
-import com.example.GYM.Services.ClaseService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class ClienteMapper {
-
-    @Autowired
-    private ClaseService claseService;
-
-    //public Profesor profesorRequestToProfesor(ProfesorRequest profesorRequest, Profesor profesor)
 
     public Persona clienteRequestToPersona(ClienteRequest clienteRequest) {
         Persona persona = new Persona();
