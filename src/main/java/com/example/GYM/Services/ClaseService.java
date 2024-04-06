@@ -7,7 +7,6 @@ import com.example.GYM.Mappers.ClaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -20,8 +19,7 @@ public class ClaseService {
     private ClaseMapper claseMapper;
 
     public ResponseEntity<?> crearNuevaClase(ClaseRequest claseRequest) {
-        Boolean existeClase = !findByNombre(claseRequest.getNombre()).isEmpty();
-        if (!existeClase) {
+        if (findByNombre(claseRequest.getNombre()).isEmpty()) {
             Clase clase = claseMapper.claseRequestToClase(claseRequest);
             claseRepository.save(clase);
             return ResponseEntity.ok("Clase guardada: " + clase.getNombre());

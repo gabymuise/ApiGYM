@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ClaseMapper {
 
-    // Convierte un ClaseRequest a un objeto Clase
     public Clase claseRequestToClase(ClaseRequest claseRequest) {
         if (claseRequest == null) {
             return null;
@@ -19,12 +18,9 @@ public class ClaseMapper {
         clase.setTipo(claseRequest.getTipo());
         clase.setDuracion(claseRequest.getDuracion());
         clase.setPrecio(claseRequest.getPrecio());
-        // Aquí puedes añadir más asignaciones si tu entidad Clase los tiene.
         return clase;
     }
 
-    // Actualiza un objeto Clase existente con los valores de ClaseRequest
-    // Este método asume que quieres actualizar una entidad Clase existente con nuevos valores de un ClaseRequest
     public void actualizarClaseDesdeRequest(ClaseRequest claseRequest, Clase claseExistente) {
         if (claseRequest == null || claseExistente == null) {
             return;
@@ -35,7 +31,6 @@ public class ClaseMapper {
         claseExistente.setTipo(claseRequest.getTipo());
         claseExistente.setDuracion(claseRequest.getDuracion());
         claseExistente.setPrecio(claseRequest.getPrecio());
-        // Aquí puedes añadir más actualizaciones si tu entidad Clase los tiene.
     }
 }
 

@@ -1,11 +1,11 @@
 package com.example.GYM.Models;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Table(name = "clase")
 @Entity
+@Table(name = "clase")
 @Getter
 @Setter
 public class Clase {
