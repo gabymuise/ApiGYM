@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 
+
+
 @SpringBootApplication
 @ComponentScan("com.example.gym")
 @EnableConfigurationProperties

@@ -7,8 +7,6 @@ import com.example.GYM.Models.Persona;
 import com.example.GYM.Repositories.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -20,7 +18,7 @@ public class PersonaService {
     @Autowired
     private PersonaMapper personaMapper;
 
-    @Transactional
+
     public String registrarPersona(PersonaRequest personaRequest) {
         if (personaRepository.findByDni(personaRequest.getDni()).isEmpty()){
             throw new IllegalArgumentException("La persona con el DNI especificado ya existe.");
@@ -35,7 +33,7 @@ public class PersonaService {
         return personaMapper.toPersonasResponse(personas);
     }
 
-    @Transactional
+
     public void eliminarPersona(Long id) {
         if (!personaRepository.existsById(id)) {
             throw new IllegalArgumentException("No se pudo encontrar la persona con el ID especificado.");

@@ -22,9 +22,10 @@ public class ClienteService {
 
     public String registrarCliente(ClienteRequest clienteRequest) {
         Cliente cliente = new Cliente();
-        cliente.setPersona(clienteMapper.clienteRequestToPersona(clienteRequest));
+        //cliente.setPersona(clienteMapper.clienteRequestToPersona(clienteRequest));
         clienteRepository.save(cliente);
-        return "Cliente guardado: " + cliente.getPersona().getNombre() + " " + cliente.getPersona().getApellido();
+        //return "Cliente guardado: " + cliente.getPersona().getNombre() + " " + cliente.getPersona().getApellido();
+        return null;
     }
 
     public void eliminarCliente(Long id) {

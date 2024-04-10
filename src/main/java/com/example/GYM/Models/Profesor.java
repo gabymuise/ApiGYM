@@ -16,7 +16,7 @@ public class Profesor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+   @OneToOne
     private Persona persona;
 
     @OneToMany

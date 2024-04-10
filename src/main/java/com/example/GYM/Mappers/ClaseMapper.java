@@ -17,7 +17,7 @@ public class ClaseMapper {
         clase.setDescripcion(claseRequest.getDescripcion());
         clase.setTipo(claseRequest.getTipo());
         clase.setDuracion(claseRequest.getDuracion());
-        clase.setPrecio(claseRequest.getPrecio());
+        clase.setPrecio(Double.valueOf(claseRequest.getPrecio()));
         return clase;
     }
 
@@ -30,7 +30,7 @@ public class ClaseMapper {
         claseExistente.setDescripcion(claseRequest.getDescripcion());
         claseExistente.setTipo(claseRequest.getTipo());
         claseExistente.setDuracion(claseRequest.getDuracion());
-        claseExistente.setPrecio(claseRequest.getPrecio());
+        claseExistente.setPrecio(Double.valueOf(claseRequest.getPrecio()));
     }
 }
 

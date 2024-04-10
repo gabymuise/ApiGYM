@@ -15,19 +15,14 @@ public class Clase {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "tipo")
     private String tipo;
 
-    @Column(name = "duracion")
-    private int duracion; // Duración en minutos
+    private Integer duracion; // Duración en minutos
 
-    @Column(name = "precio")
-    private float precio;
+    private Double precio;
 
 }
