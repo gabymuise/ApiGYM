@@ -17,8 +17,8 @@ public class Cliente {
     @Column(name = "id")
     private Long id;
 
-    //@OneToOne
-    //private Persona persona;
+    @OneToOne
+    private Persona persona;
 
     @OneToMany
     private List<Clase> clases;

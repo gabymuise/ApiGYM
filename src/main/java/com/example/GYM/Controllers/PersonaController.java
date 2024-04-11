@@ -14,7 +14,7 @@ public class PersonaController {
 
     @Autowired
     private PersonaService personaService;
-/*
+
     @PostMapping("/nueva")
     public ResponseEntity<String> nuevaPersona(@RequestBody PersonaRequest personaRequest) {
         try {
@@ -22,7 +22,7 @@ public class PersonaController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-    }*/
+    }
 
     @GetMapping("/listar")
     public ResponseEntity<PersonasResponse> listarPersonas() {
